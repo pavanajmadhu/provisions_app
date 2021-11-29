@@ -1,0 +1,8 @@
+[
+   {"itemName" : "ketchup","stock":6,"unitprice":20},
+    {"itemName":"chips","stock":19,"unitprice":15},
+    {"itemName":"soup","stock":7,"unitprice":30},
+   {"itemName": "fruit","stock":26,"unitprice":100},
+   {"itemName" :"vegetable","stock":17,"unitprice":80}
+
+]
