@@ -4,6 +4,7 @@ import GroceriesScreen  from './screens/groceriesScreen'
 import AdministratorLoginScreen from './screens/loginAdministratorScreen'
 import AddGroceries from './screens/addGroceriesScreen'
 import AddNewGroceries from './screens/addNewGroceriesScreen'
+import OrdersScreen from './screens/ordersScreen';
 
 import {createSwitchNavigator,createAppContainer} from 'react-navigation'
 import LoginScreen from './screens/loginScreen';
@@ -20,11 +21,14 @@ export default class App extends React.Component {
 
 
 const SwitchNavigator =createSwitchNavigator({
+
   loginScreen:LoginScreen,
+  groceriesScreen:GroceriesScreen,
   administratorLoginScreen:AdministratorLoginScreen,
   AddGroceries:AddGroceries,
   groceriesScreen:GroceriesScreen,
-  AddNewGroceries:AddNewGroceries
+  AddNewGroceries:AddNewGroceries,
+  ordersScreen:OrdersScreen
   })
   
   

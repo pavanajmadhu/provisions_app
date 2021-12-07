@@ -92,15 +92,15 @@ export default class LoginScreen extends Component {
       const result = await Google.logInAsync({
         behaviour: 'web',
         androidClientId:
-'880848362501-9j7pq7i2veqbgmopmr7s1fdp7rfdol9g.apps.googleusercontent.com',
-        iosClientId:
 '880848362501-kis5utt1ua58h3vv5ls9h9935u459tfn.apps.googleusercontent.com',
+        iosClientId:
+'880848362501-9j7pq7i2veqbgmopmr7s1fdp7rfdol9g.apps.googleusercontent.com',
         scopes: ['profile', 'email'],
       });
 
       if (result.type === 'success') {
         this.onSignIn(result);
-        //this.props.navigation.navigate('groceriesScreen')
+        this.props.navigation.navigate('groceriesScreen')
 
         return result.accessToken;
       } else {
@@ -110,6 +110,7 @@ export default class LoginScreen extends Component {
       console.log(e.message);
       return { error: true };
     }
+
   };
 
   render() {
@@ -147,7 +148,7 @@ export default class LoginScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#15193c',
   },
   droidSafeArea: {
     marginTop:
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: RFValue(40),
-    fontFamily: 'Bubblegum-Sans',
+    fontFamily: 'impact',
   },
   buttonContainer: {
     flex: 0.3,
@@ -171,13 +172,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    width: RFValue(250),
-    height: RFValue(50),
+    width: RFValue(100),
+    height: RFValue(30),
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     borderRadius: RFValue(30),
     backgroundColor: 'white',
+    margin:10
   },
  
   

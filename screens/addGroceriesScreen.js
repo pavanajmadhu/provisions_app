@@ -20,7 +20,9 @@ updateToFirebase=(itemname)=>{
   var data={item:itemname,
     unit:this.state.unitTextInput[itemname],
     stock:this.state.stockTextInput[itemname],
-    unitPrice:this.state.unitPriceTextInput[itemname]
+    unitPrice:this.state.unitPriceTextInput[itemname],
+    
+
   }
   console.log(data)
 firebase.database().ref('items/'+itemname).update(data)
@@ -28,7 +30,7 @@ firebase.database().ref('items/'+itemname).update(data)
 renderItem = ({item}) => {
   console.log(item)
   return(
-      <View>
+      <View styles={styles.flatListView}>
 
       <View style={styles.flatListView}>
       <Text style={styles.text}>{item.itemName}</Text>
@@ -70,6 +72,7 @@ renderItem = ({item}) => {
       /> 
 
       <TouchableOpacity style={styles.button} onPress={()=>this.updateToFirebase(item.itemName)}> <Text style={styles.buttonText}> UPDATE </Text> </TouchableOpacity>
+   
 
              </View>
 
@@ -83,7 +86,9 @@ renderItem = ({item}) => {
 
       <View>
       <Text>add groceries</Text>
-      <TouchableOpacity  onPress={()=>{this.props.navigation.navigate('addNewGroceries')}}>add new grocery</TouchableOpacity>
+      <TouchableOpacity  style={styles.button} onPress={()=>{this.props.navigation.navigate('AddNewGroceries')}}><Text style={styles.buttonText}>add new grocery</Text></TouchableOpacity>
+      <TouchableOpacity  style={styles.button} onPress={()=>{this.props.navigation.navigate('ordersScreen')}}><Text style={styles.buttonText}> check orders</Text></TouchableOpacity>
+
       </View>
 
   <Image/>
@@ -117,7 +122,7 @@ const styles=StyleSheet.create({
       flex:1,
       justifyContent:'center',
       alignItems:'center',
-      color:'#eaeb71'
+      color:'black'
   },
   safeAreaView:{
    marginTop:(Platform.OS==='android') ? StatusBar.currentHeight : 0
@@ -129,13 +134,14 @@ const styles=StyleSheet.create({
       alignItems:'center'
     },
   textInput: {
-      width: 75,
-      height: 20,
-      borderWidth: 1.5,
-      borderRightWidth: 10,
-      fontSize: 20,
-      margin:10
-
+    width:RFValue(50),
+    height: RFValue(20),
+    borderColor: "white",
+    borderWidth: RFValue(1),
+    borderRadius: RFValue(10),
+    paddingLeft: RFValue(10),
+    color: "black",
+    margin:20
     },
      text: {
       color: "black",
@@ -143,15 +149,21 @@ const styles=StyleSheet.create({
       fontFamily: "Bubblegum-Sans",
       margin:10
     },
-    button:{
-      height:20,
-      width:80,
-      borderRadius:20,
-      color:'white'
+    button: {
+      width: RFValue(70),
+      height: RFValue(20),
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
+      borderRadius: RFValue(5),
+      backgroundColor: "black",
+      margin:10
     },
     buttonText:{
-color:'black',
-fontFamily:'bubblegum-sans'
+color:'white',
+fontFamily:'bubblegum-sans',
+fontSize: RFValue(10),
+
     }
 
 

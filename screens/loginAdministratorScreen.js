@@ -31,7 +31,7 @@ export default class administratorLoginScreen extends React.Component {
   }
   render(){
     return(
-      <View>
+      <View style={styles.container}>
        <TextInput 
               style={styles.textInput} 
               placeholder="Email" 
@@ -65,23 +65,27 @@ const styles = StyleSheet.create({
   container : {
     flex : 1,
     alignItems : "center",
-    justifyContent : "center"
+    justifyContent : "center",
+    backgroundColor: '#15193c',
+
   },
   textInput : {
+    width:RFValue(150),
     height: RFValue(40),
     borderColor: "white",
     borderWidth: RFValue(1),
     borderRadius: RFValue(10),
     paddingLeft: RFValue(10),
-    color: "black",
+    color: "white",
+    margin:20
   },
    submitButton : {
-    width: RFValue(250),
-    height: RFValue(50),
+    width: RFValue(100),
+    height: RFValue(30),
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    borderRadius: RFValue(30),
+    borderRadius: RFValue(10),
     backgroundColor: 'white',
   }
  

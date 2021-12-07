@@ -15,20 +15,14 @@ export default class GroceriesScreen extends React.Component {
         };
     }
 
-    renderItem = ({item}) => {
+    renderItem = ({item,index}) => {
         return(
             <View>
 
             <View style={styles.flatListView}>
-            //Checkbox
             
-            // Item name
-            <Text style={styles.text}>{this.state.groceries}</Text>
-            //Item Stock
-            <Text style={styles.text}>{this.state.groceries.stock}</Text>
-            // Unit Price
-            <Text style={styles.text}>{this.state.groceries.unitprice}</Text>
-            // TextInput 
+            <Text style={styles.text}>{this.state.groceries[index].itemName}</Text>
+            <Text style={styles.text}>{this.state.groceries[index].unitprice}</Text>
             <TextInput 
             style={styles.textInput}
               onChangeText = {(text) => {
@@ -36,7 +30,7 @@ export default class GroceriesScreen extends React.Component {
                   unitTextInput : text
                 });
               }}
-              value={this.state.unitTextInput}
+              value={this.state.unitTextInput[item.itemName]}
             />            </View>
 
             </View>
@@ -51,6 +45,7 @@ export default class GroceriesScreen extends React.Component {
                     {/* <Image/> */}
                     <Text>Shop Groceries</Text>
                 </View>
+                <TouchableOpacity><Text>Order</Text></TouchableOpacity>
                 <ScrollView>
                     <FlatList
                         data = {this.state.groceries}
@@ -89,7 +84,7 @@ const styles=StyleSheet.create({
 
       },
        text: {
-        color: "white",
+        color: "black",
         fontSize: RFValue(20),
         fontFamily: "Bubblegum-Sans",
         margin:10
