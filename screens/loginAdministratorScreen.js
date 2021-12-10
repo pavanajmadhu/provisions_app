@@ -3,7 +3,7 @@ import { Button, View, Text, Image, TextInput,TouchableOpacity ,StyleSheet} from
 import firebase from 'firebase'
 import {RFValue} from 'react-native-responsive-fontsize'
 
-export default class administratorLoginScreen extends React.Component {
+export default class AdministratorLoginScreen extends React.Component {
   constructor(){
     super()
     this.state={

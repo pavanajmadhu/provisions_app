@@ -11,9 +11,7 @@ import {
 } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { RFValue } from 'react-native-responsive-fontsize';
-import * as Google from 'expo-google-app-auth';
-import firebase from 'firebase';
-import LoginAdministratorScreen from './loginAdministratorScreen';
+import LoadingScreen from './loadingSceen';
 
 
 
@@ -30,89 +28,7 @@ export default class LoginScreen extends Component {
   componentDidMount() {
   }
 
-  isUserEqual = (googleUser, firebaseUser) => {
-    if (firebaseUser) {
-      var providerData = firebaseUser.providerData;
-      for (var i = 0; i < providerData.length; i++) {
-        if (
-          providerData[i].providerId ===
-            firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
-          providerData[i].uid === googleUser.getBasicProfile().getId()
-        ) {
-          return true;
-        }
-      }
-    }
-    return false;
-  };
-
-  onSignIn = (googleUser) => {
-    var unsubscribe = firebase.auth().onAuthStateChanged((firebaseUser) => {
-      unsubscribe();
-      if (!this.isUserEqual(googleUser, firebaseUser)) {
-        var credential = firebase.auth.GoogleAuthProvider.credential(
-          googleUser.idToken,
-          googleUser.accessToken
-        );
-
-        firebase
-          .auth()
-          .signInWithCredential(credential)
-          .then(function (result) {
-            if (result.additionalUserInfo.isNewUser) {
-              firebase
-                .database()
-                .ref('/users/' + result.user.uid)
-                .set({
-                  gmail: result.user.email,
-                  profile_picture: result.additionalUserInfo.profile.picture,
-                  locale: result.additionalUserInfo.profile.locale,
-                  first_name: result.additionalUserInfo.profile.given_name,
-                  last_name: result.additionalUserInfo.profile.family_name,
-                })
-                .then(function (snapshot) {});
-            }
-          })
-          .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            var email = error.email;
-            var credential = error.credential;
-          });
-      } else {
-        console.log('User already signed-in Firebase.');
-      }
-    });
-  };
-
- 
-
-  signInWithGoogleAsync = async () => {
-    try {
-      const result = await Google.logInAsync({
-        behaviour: 'web',
-        androidClientId:
-'880848362501-kis5utt1ua58h3vv5ls9h9935u459tfn.apps.googleusercontent.com',
-        iosClientId:
-'880848362501-9j7pq7i2veqbgmopmr7s1fdp7rfdol9g.apps.googleusercontent.com',
-        scopes: ['profile', 'email'],
-      });
-
-      if (result.type === 'success') {
-        this.onSignIn(result);
-        this.props.navigation.navigate('groceriesScreen')
-
-        return result.accessToken;
-      } else {
-        return { cancelled: true };
-      }
-    } catch (e) {
-      console.log(e.message);
-      return { error: true };
-    }
-
-  };
-
+  
   render() {
      
       return (
@@ -125,7 +41,7 @@ export default class LoginScreen extends Component {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={styles.button}
-              onPress={() => this.signInWithGoogleAsync()}>
+              onPress={() => this.props.navigation.navigate('loadingScreen')}>
              
               <Text> sign in as customer   </Text>
             </TouchableOpacity>
@@ -164,7 +80,6 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: RFValue(40),
-    fontFamily: 'impact',
   },
   buttonContainer: {
     flex: 0.3,

@@ -5,9 +5,11 @@ import AdministratorLoginScreen from './screens/loginAdministratorScreen'
 import AddGroceries from './screens/addGroceriesScreen'
 import AddNewGroceries from './screens/addNewGroceriesScreen'
 import OrdersScreen from './screens/ordersScreen';
-
+import BookingConfirmationScreen from './screens/bookingConformationScreen'
+import UserLoginScreen from './screens/userLoginScreen';
 import {createSwitchNavigator,createAppContainer} from 'react-navigation'
 import LoginScreen from './screens/loginScreen';
+import LoadingScreen from './screens/loadingSceen';
 import firebase from 'firebase';
 import { firebaseConfig } from './config';
 firebase.initializeApp(firebaseConfig)
@@ -21,14 +23,16 @@ export default class App extends React.Component {
 
 
 const SwitchNavigator =createSwitchNavigator({
-
   loginScreen:LoginScreen,
   groceriesScreen:GroceriesScreen,
   administratorLoginScreen:AdministratorLoginScreen,
   AddGroceries:AddGroceries,
   groceriesScreen:GroceriesScreen,
   AddNewGroceries:AddNewGroceries,
-  ordersScreen:OrdersScreen
+  ordersScreen:OrdersScreen,
+  bookingConfirmationScreen:BookingConfirmationScreen,
+  userLoginScreen:UserLoginScreen,
+  loadingScreen:LoadingScreen
   })
   
   

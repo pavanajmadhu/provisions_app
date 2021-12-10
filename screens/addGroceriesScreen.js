@@ -17,7 +17,7 @@ export default class AddGroceries extends React.Component {
     };
 }
 updateToFirebase=(itemname)=>{
-  var data={item:itemname,
+  var data={itemName:itemname,
     unit:this.state.unitTextInput[itemname],
     stock:this.state.stockTextInput[itemname],
     unitPrice:this.state.unitPriceTextInput[itemname],
@@ -139,14 +139,12 @@ const styles=StyleSheet.create({
     borderColor: "white",
     borderWidth: RFValue(1),
     borderRadius: RFValue(10),
-    paddingLeft: RFValue(10),
     color: "black",
     margin:20
     },
      text: {
       color: "black",
       fontSize: RFValue(10),
-      fontFamily: "Bubblegum-Sans",
       margin:10
     },
     button: {
@@ -161,7 +159,6 @@ const styles=StyleSheet.create({
     },
     buttonText:{
 color:'white',
-fontFamily:'bubblegum-sans',
 fontSize: RFValue(10),
 
     }

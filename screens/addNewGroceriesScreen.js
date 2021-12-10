@@ -2,7 +2,7 @@ import React from 'react'
 import { Text,View,TouchableOpacity,TextInput,StyleSheet,SafeAreaView,Platform,StatusBar,FlatList,ScrollView } from 'react-native'
 import {RFValue} from 'react-native-responsive-fontsize'
 import firebase from 'firebase'
-
+import { firebaseConfig } from '../config'
 
 export default class AddNewGroceries extends React.Component {
     constructor(){
@@ -15,7 +15,7 @@ export default class AddNewGroceries extends React.Component {
         };
     }
   addToFirebase=()=>{
-      var data={item:this.state.nameTextInput2,
+      var data={itemName:this.state.nameTextInput2,
         unit:this.state.unitTextInput2,
         stock:this.state.stockTextInput2,
         unitPrice:this.state.unitPriceTextInput2
@@ -113,7 +113,6 @@ textInput: {
    text: {
     color: "black",
     fontSize: RFValue(10),
-    fontFamily: "Bubblegum-Sans",
     margin:10
   },
   button:{
@@ -124,13 +123,11 @@ textInput: {
   },
   buttonText:{
 color:'black',
-fontFamily:'bubblegum-sans'
   },
   titleText:{
     color: 'white',
     textAlign: 'center',
     fontSize: RFValue(40),
-    fontFamily: 'Bubblegum-Sans',
   },
   titleContainer: {
     flex: 0.4,
