@@ -23,8 +23,9 @@ export default class App extends React.Component {
 
 
 const SwitchNavigator =createSwitchNavigator({
-  loginScreen:LoginScreen,
   groceriesScreen:GroceriesScreen,
+  loginScreen:LoginScreen,
+
   administratorLoginScreen:AdministratorLoginScreen,
   AddGroceries:AddGroceries,
   groceriesScreen:GroceriesScreen,

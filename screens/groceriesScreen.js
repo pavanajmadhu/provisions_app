@@ -1,37 +1,54 @@
 import React from 'react'
 import { Text,View,TouchableOpacity,TextInput,StyleSheet,SafeAreaView,Platform,StatusBar,FlatList,ScrollView } from 'react-native'
 let groceriesList=require('./groceriesList.json')
-console.log(groceriesList)
 import {RFValue} from 'react-native-responsive-fontsize'
 import firebase from 'firebase'
-import TouchHistoryMath from 'react-native/Libraries/Interaction/TouchHistoryMath'
 
 
 export default class GroceriesScreen extends React.Component {
     constructor(){
         super()
         this.state={
-            groceries:{},
-            unitTextInput:'',
-
+            groceries:[],
+            order:{},
+            units:0
         };
     }
+
     componentDidMount(){
         this.fetchItems()
     }
+
 fetchItems=()=>{
-    firebase.database().ref('items').on('value',(data)=>{
-this.setState({
-    groceries:data.val()
-})
-console.log(this.state.groceries)
 
-    })
+    firebase.database().ref('/items/').on('value',
+    (data)=>{
+        console.log(data.val())
+        let groceries = [];
+        if(data.val()){
+            Object.keys(data.val()).forEach(function (key) {
+                groceries.push({
+                  key: key,
+                  value: data.val()[key]
+                });
+              });
+            }
+            this.setState({ groceries: groceries });
+        })
+    console.log(this.state.groceries)
 
-}
+    }
 
 updateTransaction=()=>{
     this.props.navigation.navigate('bookingConfirmationScreen')
+    var data=this.state.order  
+    console.log(data)
+    firebase.database()
+    .ref('/transaction/'+ Math.random()
+    .toString(36)
+    .slice(2))
+    .update(data)
+
 }
     
     renderItem = ({item,index}) => {
@@ -40,16 +57,17 @@ updateTransaction=()=>{
 
             <View style={styles.flatListView}>
             
-            <Text style={styles.text}>{this.state.groceries[item].item}</Text>
-            <Text style={styles.text}>{this.state.groceries[item].unitPrice}</Text>
+            <Text style={styles.text}>{this.state.groceries[index].value.item}</Text>
+            <Text style={styles.text}> {this.state.groceries[index].value.unitPrice}</Text>
             <TextInput 
             style={styles.textInput}
               onChangeText = {(text) => {
-                this.setState({
-                  unitTextInput : text
-                });
+                  this.setState({units:text})
+                  let a = {item:this.state.groceries[index].value.item,units:this.state.units }
+                  
+                this.setState({order: {...this.state.order, a} });
               }}
-              value={this.state.unitTextInput[item.itemName]}
+              value={this.state.units}
             />            </View>
 
             </View>

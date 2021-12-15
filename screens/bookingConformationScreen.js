@@ -34,10 +34,10 @@ export default class OrdersScreen extends React.Component {
                         return index.toString();
                     }}                    
                 />*/}
-                <Text>total</Text>
+                <Text style={styles.text}>total</Text>
                 <View style={styles.buttonView}>
-                <TouchableOpacity><Text>cancel</Text></TouchableOpacity>
-                <TouchableOpacity><Text>Book</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.button}><Text style={styles.buttonText}>cancel</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.button}><Text style={styles.buttonText}>Book</Text></TouchableOpacity>
                 </View>
 
                 
